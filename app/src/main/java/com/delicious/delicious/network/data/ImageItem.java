@@ -1,7 +1,6 @@
 package com.delicious.delicious.network.data;
 
 public class ImageItem {
-
     private String title;
     private String link;
     private String image;
