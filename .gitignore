@@ -5,6 +5,3 @@
 .idea/
 .DS_Store
 /build
-/captures
-src/main/java/com/delicious/delicious/network/retrofit/
-app/src/main/java/com/delicious/delicious/network/retrofit/
