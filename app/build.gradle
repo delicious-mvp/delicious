@@ -43,4 +43,6 @@ dependencies {
     compile 'com.facebook.fresco:fbcore:0.10.0@aar'
     compile 'com.facebook.fresco:imagepipeline:0.10.0@aar'
     compile group: 'com.facebook.fresco', name: 'imagepipeline-okhttp3', version: '0.10.0'
+    compile 'com.facebook.stetho:stetho:1.3.1'
+    compile 'com.facebook.stetho:stetho-okhttp3:1.3.1'
 }

@@ -1,7 +1,7 @@
 package com.delicious.delicious.network;
 
 import com.delicious.delicious.BuildConfig;
-import com.delicious.delicious.network.data.ImageResult;
+import com.delicious.delicious.network.data.SearchChannel;
 
 import retrofit2.http.GET;
 import retrofit2.http.Query;
@@ -13,5 +13,5 @@ import rx.Observable;
 
 public interface RequestService {
     @GET("image?output=json&apikey=" + BuildConfig.DAUM_API_KEY)
-    Observable<ImageResult> getSearch(@Query("q") String seachText, @Query("pageno") int pageNo);
+    Observable<SearchChannel> getSearch(@Query("q") String seachText, @Query("pageno") int pageNo);
 }
