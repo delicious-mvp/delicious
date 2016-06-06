@@ -1,4 +1,4 @@
-package com.delicious.delicious.utils;
+package com.delicious.delicious.util;
 
 import android.app.Activity;
 import android.graphics.drawable.Drawable;

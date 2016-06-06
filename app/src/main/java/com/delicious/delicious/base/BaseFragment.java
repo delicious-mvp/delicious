@@ -1,13 +1,13 @@
 package com.delicious.delicious.base;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.View;
 
-import com.delicious.delicious.utils.ViewUnbindHelper;
+import com.delicious.delicious.util.ViewUnbindHelper;
 
 import java.lang.ref.WeakReference;
 
@@ -18,7 +18,7 @@ import butterknife.Unbinder;
  * Created by chonamdu on 2016. 6. 6..
  */
 
-public class BaseFragment extends Fragment{
+public class BaseFragment extends Fragment {
     private WeakReference<ProgressDialog> loadingDialog;
     private BaseActivity baseActivity;
     private Unbinder unbinder;
