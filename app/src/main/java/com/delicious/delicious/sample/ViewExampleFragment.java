@@ -24,14 +24,13 @@ import butterknife.BindView;
 /**
  * Created by tae-hwan on 6/6/16.
  */
-public class ViewExampleFragment extends BaseFragment implements ViewExampleContract.View {
+public class ViewExampleFragment extends BaseFragment<ViewExampleContract.Presenter> implements ViewExampleContract.View {
 
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
 
     private ImageView imgBottomSheet;
 
-    private ViewExampleContract.Presenter presenter;
     private ViewExampleRecyclerAdapter recyclerAdapter;
 
     private BottomSheetBehavior bottomSheetBehavior;
@@ -69,7 +68,7 @@ public class ViewExampleFragment extends BaseFragment implements ViewExampleCont
 
             @Override
             public void onSlide(@NonNull View bottomSheet, float slideOffset) {
-                presenter.onSlide(slideOffset);
+                getPresenter().onSlide(slideOffset);
             }
         });
 
@@ -78,14 +77,14 @@ public class ViewExampleFragment extends BaseFragment implements ViewExampleCont
         recyclerAdapter.setOnRecyclerItemClickListener(new OnRecyclerItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                presenter.onItemClick(position);
+                getPresenter().onItemClick(position);
             }
         });
 
-        presenter.setDataModel(recyclerAdapter);
+        getPresenter().setDataModel(recyclerAdapter);
         recyclerView.setAdapter(recyclerAdapter);
 
-        presenter.updateData();
+        getPresenter().updateData();
     }
 
     @Override
@@ -107,10 +106,5 @@ public class ViewExampleFragment extends BaseFragment implements ViewExampleCont
     @Override
     public void hideFloatingActionButton() {
         floatingActionButton.hide();
-    }
-
-    @Override
-    public void setPresenter(ViewExampleContract.Presenter presenter) {
-        this.presenter = presenter;
     }
 }
