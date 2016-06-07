@@ -14,6 +14,7 @@ import android.view.View;
 import com.delicious.delicious.base.BaseActivity;
 import com.delicious.delicious.network.data.SearchChannel;
 import com.delicious.delicious.sample.ViewExampleActivity;
+import com.delicious.delicious.search.SearchActivity;
 
 import butterknife.OnClick;
 import rx.android.schedulers.AndroidSchedulers;
@@ -73,7 +74,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     @OnClick(R.id.btn_sample_activity)
     public void onClickSampleBtn(View view) {
-        startActivity(new Intent(this, ViewExampleActivity.class));
+        startActivity(new Intent(this, SearchActivity.class));
     }
 
     @Override
