@@ -135,34 +135,5 @@ public class ViewSearchPresenter extends AbstractPresenter<ViewSearchContract.Vi
                         getDataView().refresh();
                     }
                 });
-               /* .filter(new Func1<SearchChannel, Boolean>() {
-                    @Override
-                    public Boolean call(SearchChannel searchChannel) {
-                        Log.v("DEBUG230","searchChannel searchChannel  : " + searchChannel.getChannel().getItem().size());
-                        return searchChannel.getChannel() != null && searchChannel.getChannel().getItem() != null;
-                    }
-                })
-                .flatMap(new Func1<SearchChannel, Observable<List<ImageItem>>>() {
-                    @Override
-                    public Observable<List<ImageItem>> call(SearchChannel searchChannel) {
-                        return Observable.just(searchChannel.getChannel().getItem());
-                    }
-                }).subscribe(new Action1<List<ImageItem>>() {
-            @Override
-            public void call(List<ImageItem> items) {
-                mSearchDataModel.addItems(items);
-            }
-        }, new Action1<Throwable>() {
-            @Override
-            public void call(Throwable throwable) {
-
-            }
-        }, new Action0() {
-            @Override
-            public void call() {
-                Log.v("DEBUG230"," getView().refresh()호출");
-                getView().refresh();
-            }
-        });*/
     }
 }
