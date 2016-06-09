@@ -86,54 +86,18 @@ public class ViewSearchPresenter extends AbstractPresenter<ViewSearchContract.Vi
                 .onBackpressureBuffer()
                 .throttleWithTimeout(200, TimeUnit.MILLISECONDS)
                 .observeOn(Schedulers.io())
-                .subscribe(new Action1<String>() {
-                    @Override
-                    public void call(String s) {
-                        Log.v("DEBUG230","initSubscription s  : " + s);
-                        loadSearchResult(s);
-                    }
-                }, new Action1<Throwable>() {
-                    @Override
-                    public void call(Throwable throwable) {
+                .subscribe(this::loadSearchResult, throwable -> {
 
-                    }
                 });
     }
     private void loadSearchResult(String text) {
         Global.getRequestService().getSearch(text,pageCnt)
-                .map(new Func1<SearchChannel, ImageResult>() {
-                    @Override
-                    public ImageResult call(SearchChannel searchChannel) {
-                        return searchChannel.getChannel();
-                    }
-                })
-                .filter(new Func1<ImageResult, Boolean>() {
-                    @Override
-                    public Boolean call(ImageResult imageResult) {
-                        return imageResult != null && imageResult.getResult() > 0;
-                    }})
-                .flatMap(new Func1<ImageResult, Observable<ImageItem>>() {
-                    @Override
-                    public Observable<ImageItem> call(ImageResult imageResult) {
-                        return Observable.from(imageResult.getItem());
-                    }
-                })
+                .map(searchChannel -> searchChannel.getChannel())
+                .filter(imageResult -> imageResult != null && imageResult.getResult() > 0)
+                .flatMap((Func1<ImageResult, Observable<ImageItem>>) imageResult -> Observable.from(imageResult.getItem()))
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<ImageItem>() {
-                    @Override
-                    public void call(ImageItem imageItem) {
-                        mSearchDataModel.addItem(imageItem);
-                    }
-                }, new Action1<Throwable>() {
-                    @Override
-                    public void call(Throwable throwable) {
+                .subscribe(imageItem -> mSearchDataModel.addItem(imageItem), throwable -> {
 
-                    }
-                }, new Action0() {
-                    @Override
-                    public void call() {
-                        getDataView().refresh();
-                    }
-                });
+                }, () -> getDataView().refresh());
     }
 }
