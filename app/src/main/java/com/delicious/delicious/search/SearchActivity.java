@@ -12,6 +12,9 @@ import com.delicious.delicious.util.ActivityUtil;
  */
 
 public class SearchActivity extends BaseActivity {
+
+    private ViewSearchPresenter viewSearchPresenter;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,7 +24,15 @@ public class SearchActivity extends BaseActivity {
             searchFragment = SearchFragment.newInstance();
             ActivityUtil.addFragmentToActivity(getSupportFragmentManager(),searchFragment,R.id.contentFrame);
         }
-        ViewSearchPresenter viewSearchPresenter = new ViewSearchPresenter(searchFragment);
+        viewSearchPresenter = new ViewSearchPresenter(searchFragment);
+    }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        if (viewSearchPresenter != null) {
+            viewSearchPresenter.detachView();
+        }
     }
 }

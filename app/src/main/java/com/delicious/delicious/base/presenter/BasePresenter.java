@@ -6,4 +6,9 @@ package com.delicious.delicious.base.presenter;
 public interface BasePresenter {
 
     void start();
+
+    /**
+     * View detach
+     */
+    void detachView();
 }

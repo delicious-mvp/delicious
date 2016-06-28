@@ -13,7 +13,22 @@ public abstract class AbstractPresenter<V extends BaseView> implements BasePrese
         view.setPresenter(this);
     }
 
-    public V getView() {
+    /**
+     * MVP View return
+     */
+    protected V getView() {
         return view;
+    }
+
+    /**
+     * View Attach check
+     */
+    protected boolean isViewAttached() {
+        return view != null;
+    }
+
+    @Override
+    public void detachView() {
+        view = null;
     }
 }

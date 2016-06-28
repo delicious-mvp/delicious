@@ -74,12 +74,7 @@ public class ViewExampleFragment extends BaseFragment<ViewExampleContract.Presen
 
 
         recyclerAdapter = new ViewExampleRecyclerAdapter(getContext());
-        recyclerAdapter.setOnRecyclerItemClickListener(new OnRecyclerItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                getPresenter().onItemClick(position);
-            }
-        });
+        recyclerAdapter.setOnRecyclerItemClickListener(position -> getPresenter().onItemClick(position));
 
         getPresenter().setDataModel(recyclerAdapter);
         recyclerView.setAdapter(recyclerAdapter);

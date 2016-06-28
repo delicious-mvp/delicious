@@ -13,6 +13,8 @@ import com.delicious.delicious.util.ActivityUtil;
  */
 public class ViewExampleActivity extends BaseActivity {
 
+    private ViewExamplePresenter presenter;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +26,15 @@ public class ViewExampleActivity extends BaseActivity {
             ActivityUtil.addFragmentToActivity(getSupportFragmentManager(), fragment, R.id.contentFrame);
         }
 
-        ViewExamplePresenter presenter = new ViewExamplePresenter(fragment);
+        presenter = new ViewExamplePresenter(fragment);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        if (presenter != null) {
+            presenter.detachView();
+        }
     }
 }
