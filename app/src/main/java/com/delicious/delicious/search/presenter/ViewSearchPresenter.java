@@ -1,23 +1,16 @@
 package com.delicious.delicious.search.presenter;
 
 import android.text.TextUtils;
-import android.util.Log;
-
 import com.delicious.delicious.Global;
 import com.delicious.delicious.base.presenter.AbstractPresenter;
 import com.delicious.delicious.network.data.ImageItem;
 import com.delicious.delicious.network.data.ImageResult;
-import com.delicious.delicious.network.data.SearchChannel;
 import com.delicious.delicious.search.adapterdelegates.model.SearchDataModel;
 import com.delicious.delicious.search.adapterdelegates.view.SearchAdapterView;
-
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 import rx.Observable;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action0;
-import rx.functions.Action1;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 import rx.subjects.PublishSubject;
@@ -74,7 +67,7 @@ public class ViewSearchPresenter extends AbstractPresenter<ViewSearchContract.Vi
 
     @Override
     public void onItemClick(int position) {
-
+        getView().goToDetailView(position);
     }
 
     @Override

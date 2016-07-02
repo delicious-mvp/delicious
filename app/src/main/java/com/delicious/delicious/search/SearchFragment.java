@@ -1,5 +1,6 @@
 package com.delicious.delicious.search;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -93,6 +94,11 @@ public class SearchFragment extends BaseFragment<ViewSearchContract.Presenter> i
     public void refresh() {
         Log.v("DEBUG230","refresh");
         getPresenter().getDataView().refresh();
+    }
+
+    @Override
+    public void goToDetailView(int postion) {
+//        Intent intent =;
     }
 
     @Override

@@ -13,6 +13,7 @@ import com.delicious.delicious.search.adapterdelegates.view.SearchAdapterView;
 public interface ViewSearchContract {
     interface View extends BaseView<Presenter>{
         void refresh();
+        void goToDetailView(int postion);
     }
     interface Presenter extends BasePresenter{
         void setDataView(SearchAdapterView searchAdapterView);
