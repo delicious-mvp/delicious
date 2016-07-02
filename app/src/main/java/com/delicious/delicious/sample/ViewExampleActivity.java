@@ -34,7 +34,7 @@ public class ViewExampleActivity extends BaseActivity {
         super.onDestroy();
 
         if (presenter != null) {
-            presenter.detachView();
+            presenter.destroy();
         }
     }
 }

@@ -10,5 +10,5 @@ public interface BasePresenter {
     /**
      * View detach
      */
-    void detachView();
+    void destroy();
 }

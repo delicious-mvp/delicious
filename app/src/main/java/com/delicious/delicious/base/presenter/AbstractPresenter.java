@@ -28,7 +28,7 @@ public abstract class AbstractPresenter<V extends BaseView> implements BasePrese
     }
 
     @Override
-    public void detachView() {
+    public void destroy() {
         view = null;
     }
 }

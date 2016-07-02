@@ -32,7 +32,7 @@ public class SearchActivity extends BaseActivity {
         super.onDestroy();
 
         if (viewSearchPresenter != null) {
-            viewSearchPresenter.detachView();
+            viewSearchPresenter.destroy();
         }
     }
 }

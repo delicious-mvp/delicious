@@ -1,6 +1,5 @@
 package com.delicious.delicious.base;
 
-import android.app.Fragment;
 import android.support.annotation.LayoutRes;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
