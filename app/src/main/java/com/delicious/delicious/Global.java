@@ -6,6 +6,7 @@ import com.delicious.delicious.network.RetrofitCreator;
 
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action0;
 import rx.schedulers.Schedulers;
 
 /**
@@ -56,5 +57,25 @@ public class Global {
             }
         };
     }
-
+    /**
+     * 예제용
+     * */
+    public static <T> Observable.Transformer<T, T> applyProgress() {
+        return new Observable.Transformer<T, T>() {
+            @Override
+            public Observable<T> call(Observable<T> observable) {
+                return observable.doOnSubscribe(new Action0() {
+                    @Override
+                    public void call() {
+                        //프로그래스 생성
+                    }
+                }).doOnUnsubscribe(new Action0() {
+                    @Override
+                    public void call() {
+                        //프로그래스바 해제
+                    }
+                });
+            }
+        };
+    }
 }
