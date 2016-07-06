@@ -4,6 +4,10 @@ import com.delicious.delicious.app.DeliciousApp;
 import com.delicious.delicious.network.RequestService;
 import com.delicious.delicious.network.RetrofitCreator;
 
+import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
+
 /**
  * Created by chonamdu on 2016. 6. 6..
  */
@@ -42,4 +46,15 @@ public class Global {
     public static void cancelRunOnUIThread(Runnable runnable) {
         DeliciousApp.applicationHandler.removeCallbacks(runnable);
     }
+
+    public static <T> Observable.Transformer<T, T> applySchedulers() {
+        return new Observable.Transformer<T, T>() {
+            @Override
+            public Observable<T> call(Observable<T> observable) {
+                return observable.subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread());
+            }
+        };
+    }
+
 }
