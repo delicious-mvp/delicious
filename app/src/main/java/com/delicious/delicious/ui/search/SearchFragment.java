@@ -72,7 +72,7 @@ public class SearchFragment extends BaseFragment<ViewSearchContract.Presenter> i
         inflater.inflate(R.menu.search, menu);
         MenuItem searchItem = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) searchItem.getActionView();
-        searchView.setQueryHint("검색어를 입력해주세요.");
+        searchView.setQueryHint("검색어를` 입력해주세요.");
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
             @Override
             public boolean onQueryTextSubmit(String s) {

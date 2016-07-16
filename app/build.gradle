@@ -76,4 +76,7 @@ dependencies {
 
     //AdapterDelegates
     compile 'com.hannesdorfmann:adapterdelegates2:2.0.1'
+
+    // Guava
+    compile 'com.google.guava:guava:19.0'
 }

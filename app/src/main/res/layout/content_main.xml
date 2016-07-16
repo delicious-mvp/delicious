@@ -17,4 +17,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Start sample activity example" />
+
+    <Button
+        android:id="@+id/shops_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_sample_activity"
+        android:layout_marginTop="10dp"
+        android:text="Shops sample activity " />
 </RelativeLayout>

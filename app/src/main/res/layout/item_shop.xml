@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/thumbnail_imageview"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:background="@color/gray_ed"
+        android:scaleType="centerCrop"
+        tools:layout_height="120dp"
+        tools:visibility="visible" />
+
+    <TextView
+        android:id="@+id/title_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/thumbnail_imageview"
+        android:textSize="15sp"
+        tools:text="고베그릴" />
+
+    <TextView
+        android:id="@+id/distance_title_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/title_textview"
+        android:layout_below="@id/title_textview"
+        android:text="거리 :"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/distance_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/distance_title_textview"
+        android:layout_marginLeft="4dp"
+        android:layout_toRightOf="@id/distance_title_textview"
+        android:text="0m"
+        android:textSize="12sp"
+        tools:text="225m" />
+
+    <TextView
+        android:id="@+id/address_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/title_textview"
+        android:layout_below="@id/distance_title_textview"
+        android:gravity="bottom"
+        android:textSize="12sp"
+        tools:text="서울 관악구 남부순환로 2082-25" />
+
+</RelativeLayout>

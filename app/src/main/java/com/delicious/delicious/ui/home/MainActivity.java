@@ -16,6 +16,7 @@ import com.delicious.delicious.R;
 import com.delicious.delicious.base.BaseActivity;
 import com.delicious.delicious.network.data.SearchChannel;
 import com.delicious.delicious.ui.search.SearchActivity;
+import com.delicious.delicious.ui.restaurants.RestaurantsActivity;
 
 import butterknife.OnClick;
 import rx.android.schedulers.AndroidSchedulers;
@@ -76,6 +77,11 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     @OnClick(R.id.btn_sample_activity)
     public void onClickSampleBtn(View view) {
         startActivity(new Intent(this, SearchActivity.class));
+    }
+
+    @OnClick(R.id.shops_button)
+    public void onShopsClicked() {
+        startActivity(new Intent(this, RestaurantsActivity.class));
     }
 
     @Override
