@@ -58,7 +58,7 @@ public class Global {
         };
     }
     /**
-     * 예제용
+     * 예제
      * */
     public static <T> Observable.Transformer<T, T> applyProgress() {
         return new Observable.Transformer<T, T>() {
