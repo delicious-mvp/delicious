@@ -28,7 +28,7 @@ public class RestaurantRepository implements RestaurantDataSource {
     @Override
     public void getRestaurants(String location, int page,
                                String sort, @NonNull GetRestaurantsCallback callback) {
-        restaurantDataSource.getRestaurants(location, page, sort, new GetRestaurantsCallback() {
+        restaurantDataSource.getRestaurants(location, page,sort, new GetRestaurantsCallback() {
 
             @Override
             public void onRestaurantsLoaded(List<Restaurant> restaurants) {

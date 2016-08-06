@@ -17,6 +17,8 @@ public class RestaurantsPresenter extends AbstractPresenter<RestaurantContract.V
     private RestaurantRepository shopsRepository;
     RestaurantsAdapterContract.Model adapterModel;
 
+    private int page = 0;
+
     public RestaurantsPresenter(RestaurantContract.View view,
                                 RestaurantRepository shopsRepository) {
         super(view);
@@ -30,16 +32,19 @@ public class RestaurantsPresenter extends AbstractPresenter<RestaurantContract.V
 
     @Override
     public void start() {
-        loadRestaurants("37.476585,126.981858", 1, "0");
+        page = 0;
+        loadRestaurants("37.476585,126.981858", "0");
     }
 
     @Override
-    public void loadRestaurants(String location, int page, String sort) {
-        shopsRepository.getRestaurants(location, page, sort, new RestaurantDataSource.GetRestaurantsCallback() {
+    public void loadRestaurants(String location, String sort) {
+        shopsRepository.getRestaurants(location, ++page, sort, new RestaurantDataSource.GetRestaurantsCallback() {
 
             @Override
             public void onRestaurantsLoaded(List<Restaurant> restaurants) {
-                adapterModel.clearItems();
+                if (page <= 1) {
+                    adapterModel.clearItems();
+                }
                 adapterModel.addItems(createShopDisplayItem(restaurants));
 
                 getView().showShops();

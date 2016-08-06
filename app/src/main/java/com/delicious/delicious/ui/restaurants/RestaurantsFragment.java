@@ -49,6 +49,7 @@ public class RestaurantsFragment extends BaseFragment<RestaurantContract.Present
         recyclerView.setLayoutManager(
                 new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(adapter);
+        recyclerView.addOnScrollListener(onScrollListener);
 
         adapterView = adapter;
         getPresenter().setAdapterView(adapter);
@@ -58,6 +59,9 @@ public class RestaurantsFragment extends BaseFragment<RestaurantContract.Present
     public void onDestroy() {
         if (getPresenter() != null) {
             getPresenter().destroy();
+        }
+        if (recyclerView != null) {
+            recyclerView.removeOnScrollListener(onScrollListener);
         }
         super.onDestroy();
     }
@@ -71,4 +75,23 @@ public class RestaurantsFragment extends BaseFragment<RestaurantContract.Present
     public void showLoadFailure() {
 
     }
+
+    private RecyclerView.OnScrollListener onScrollListener = new RecyclerView.OnScrollListener() {
+
+        @Override
+        public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+            super.onScrollStateChanged(recyclerView, newState);
+
+            RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
+            if (layoutManager instanceof LinearLayoutManager) {
+                LinearLayoutManager linearLayoutManager = (LinearLayoutManager) layoutManager;
+                int visibleItemCount = linearLayoutManager.getChildCount();
+                int totalItemCount = linearLayoutManager.getItemCount();
+                int firstVisibleItemPosition = linearLayoutManager.findFirstVisibleItemPosition();
+                if (visibleItemCount + firstVisibleItemPosition >= totalItemCount) {
+                    getPresenter().loadRestaurants("37.476585,126.981858", "0");
+                }
+            }
+        }
+    };
 }
