@@ -1,6 +1,6 @@
 package com.delicious.delicious.data;
 
-public class Shop {
+public class Restaurant {
 
     private String id;
     private String title;

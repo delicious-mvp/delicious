@@ -1,9 +1,9 @@
 package com.delicious.delicious.ui.restaurants;
 
 import com.delicious.delicious.base.presenter.AbstractPresenter;
-import com.delicious.delicious.data.Shop;
-import com.delicious.delicious.data.source.shops.ShopsDataSource;
-import com.delicious.delicious.data.source.shops.ShopsRepository;
+import com.delicious.delicious.data.Restaurant;
+import com.delicious.delicious.data.source.restaurant.RestaurantDataSource;
+import com.delicious.delicious.data.source.restaurant.RestaurantRepository;
 import com.delicious.delicious.ui.restaurants.adpater.RestaurantsAdapterContract;
 import com.delicious.delicious.ui.restaurants.adpater.displayitem.DisplayItem;
 import com.delicious.delicious.ui.restaurants.adpater.displayitem.RestaurantDisplayItem;
@@ -14,11 +14,11 @@ import java.util.List;
 
 public class RestaurantsPresenter extends AbstractPresenter<RestaurantContract.View> implements RestaurantContract.Presenter {
 
-    private ShopsRepository shopsRepository;
+    private RestaurantRepository shopsRepository;
     RestaurantsAdapterContract.Model adapterModel;
 
     public RestaurantsPresenter(RestaurantContract.View view,
-                                ShopsRepository shopsRepository) {
+                                RestaurantRepository shopsRepository) {
         super(view);
         this.shopsRepository = shopsRepository;
     }
@@ -30,36 +30,41 @@ public class RestaurantsPresenter extends AbstractPresenter<RestaurantContract.V
 
     @Override
     public void start() {
-        shopsRepository.getShops(new ShopsDataSource.GetShopsCallback() {
+        loadRestaurants("37.476585,126.981858", 1, "0");
+    }
+
+    @Override
+    public void loadRestaurants(String location, int page, String sort) {
+        shopsRepository.getRestaurants(location, page, sort, new RestaurantDataSource.GetRestaurantsCallback() {
 
             @Override
-            public void onShopsLoaded(List<Shop> shops) {
+            public void onRestaurantsLoaded(List<Restaurant> restaurants) {
                 adapterModel.clearItems();
-                adapterModel.addItems(createShopDisplayItem(shops));
+                adapterModel.addItems(createShopDisplayItem(restaurants));
 
                 getView().showShops();
             }
 
             @Override
-            public void onShopsLoadFailed() {
+            public void onRestaurantsLoadFailed() {
                 getView().showLoadFailure();
             }
         });
     }
 
-    private List<DisplayItem> createShopDisplayItem(List<Shop> shops) {
+    private List<DisplayItem> createShopDisplayItem(List<Restaurant> restaurants) {
         List<DisplayItem> result = new ArrayList<>();
 
-        for (Shop shop : shops) {
+        for (Restaurant restaurant : restaurants) {
             RestaurantDisplayItem restaurantDisplayItem = new RestaurantDisplayItem();
 
-            restaurantDisplayItem.setTitle(shop.getTitle());
-            restaurantDisplayItem.setCategory(shop.getCategory());
-            restaurantDisplayItem.setDistance(shop.getDistance());
-            restaurantDisplayItem.setThumbnailUrl(shop.getImageUrl());
+            restaurantDisplayItem.setTitle(restaurant.getTitle());
+            restaurantDisplayItem.setCategory(restaurant.getCategory());
+            restaurantDisplayItem.setDistance(restaurant.getDistance());
+            restaurantDisplayItem.setThumbnailUrl(restaurant.getImageUrl());
 
-            boolean hasNewAddress = !Strings.isNullOrEmpty(shop.getNewAddress());
-            restaurantDisplayItem.setAddress(hasNewAddress ? shop.getNewAddress() : shop.getOldAddress());
+            boolean hasNewAddress = !Strings.isNullOrEmpty(restaurant.getNewAddress());
+            restaurantDisplayItem.setAddress(hasNewAddress ? restaurant.getNewAddress() : restaurant.getOldAddress());
 
             result.add(restaurantDisplayItem);
         }

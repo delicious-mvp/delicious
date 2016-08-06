@@ -3,17 +3,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
-    <ImageView
+    <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/thumbnail_imageview"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
         android:background="@color/gray_ed"
-        android:scaleType="centerCrop"
         tools:layout_height="120dp"
-        tools:visibility="visible" />
+        tools:visibility="visible"
+        fresco:placeholderImageScaleType="centerCrop"/>
 
     <TextView
         android:id="@+id/title_textview"

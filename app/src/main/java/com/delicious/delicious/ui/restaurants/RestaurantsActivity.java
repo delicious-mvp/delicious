@@ -5,7 +5,7 @@ import android.support.annotation.Nullable;
 
 import com.delicious.delicious.R;
 import com.delicious.delicious.base.BaseActivity;
-import com.delicious.delicious.data.source.shops.ShopsRepository;
+import com.delicious.delicious.data.source.restaurant.RestaurantRepository;
 import com.delicious.delicious.util.ActivityUtil;
 
 public class RestaurantsActivity extends BaseActivity {
@@ -20,7 +20,7 @@ public class RestaurantsActivity extends BaseActivity {
         // Create to presenter
         new RestaurantsPresenter(
                 restaurantsFragment,
-                ShopsRepository.getInstance()
+                RestaurantRepository.getInstance()
         );
 
         ActivityUtil.replaceFragmentToActivity(

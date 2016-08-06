@@ -16,5 +16,7 @@ public interface RestaurantContract {
     interface Presenter extends BasePresenter {
 
         void setAdapterView(RestaurantsAdapterContract.Model adapterModel);
+
+        void loadRestaurants(String location, int page, String sort);
     }
 }

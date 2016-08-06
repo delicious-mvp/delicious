@@ -1,17 +1,21 @@
 package com.delicious.delicious.ui.restaurants.adpater.adapterdelegate;
 
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.delicious.delicious.R;
 import com.delicious.delicious.ui.restaurants.adpater.displayitem.DisplayItem;
 import com.delicious.delicious.ui.restaurants.adpater.displayitem.RestaurantDisplayItem;
-import com.google.common.base.Strings;
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.interfaces.DraweeController;
+import com.facebook.drawee.view.SimpleDraweeView;
+import com.facebook.imagepipeline.request.ImageRequest;
+import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import com.hannesdorfmann.adapterdelegates2.AbsListItemAdapterDelegate;
 
 import java.util.List;
@@ -39,19 +43,31 @@ public class RestaurantAdapterDelegate extends AbsListItemAdapterDelegate<Restau
         viewHolder.distanceTextView.setText(String.format("%sm", item.getDistance()));
         viewHolder.addressTextView.setText(item.getAddress());
 
-        boolean hasThumbnail = !Strings.isNullOrEmpty(item.getThumbnailUrl());
-        if (hasThumbnail) {
-            viewHolder.thumbnailImageView.setVisibility(View.VISIBLE);
-        } else {
-            viewHolder.thumbnailImageView.setVisibility(View.GONE);
-        }
+//        boolean hasThumbnail = !Strings.isNullOrEmpty(item.getThumbnailUrl());
+//        if (hasThumbnail) {
+//            viewHolder.thumbnailImageView.setVisibility(View.VISIBLE);
+//
+//
+//        } else {
+//            viewHolder.thumbnailImageView.setVisibility(View.GONE);
+//        }
+
+        ImageRequest imageRequest= ImageRequestBuilder.
+                newBuilderWithSource(Uri.parse(item.getThumbnailUrl()))
+                .setLocalThumbnailPreviewsEnabled(false)
+                /*.setResizeOptions(new ResizeOptions(viewHolder.item_thumb.getWidth(),viewHolder.item_thumb.getHeight()))*/.build();
+
+        DraweeController draweeController = Fresco.newDraweeControllerBuilder()
+                .setImageRequest(imageRequest)
+                .build();
+        viewHolder.thumbnailImageView.setController(draweeController);
     }
 
 
     static class ShopViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.thumbnail_imageview)
-        ImageView thumbnailImageView;
+        SimpleDraweeView thumbnailImageView;
 
         @BindView(R.id.title_textview)
         TextView titleTextView;

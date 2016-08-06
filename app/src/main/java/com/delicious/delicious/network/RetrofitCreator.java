@@ -1,11 +1,9 @@
 package com.delicious.delicious.network;
 
 import android.annotation.SuppressLint;
-import android.text.TextUtils;
 
 import com.facebook.stetho.okhttp3.StethoInterceptor;
 
-import java.io.IOException;
 import java.security.SecureRandom;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
@@ -18,10 +16,7 @@ import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
-import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
@@ -34,12 +29,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitCreator {
     public static Retrofit createRetrofit() {
         return new Retrofit.Builder()
-                .baseUrl("https://apis.daum.net/search/")
+                .baseUrl("https://apis.daum.net/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .client(createOkHttpClient())
                 .build();
-
     }
 
     private static OkHttpClient createOkHttpClient() {
