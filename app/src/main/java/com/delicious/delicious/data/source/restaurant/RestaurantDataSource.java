@@ -1,22 +1,11 @@
 package com.delicious.delicious.data.source.restaurant;
 
-import android.support.annotation.NonNull;
-
 import com.delicious.delicious.data.Restaurant;
-
 import java.util.List;
-
+import rx.Observable;
 public interface RestaurantDataSource {
 
-
-
-    interface GetRestaurantsCallback {
-
-        void onRestaurantsLoaded(List<Restaurant> restaurants);
-
-        void onRestaurantsLoadFailed();
-    }
-
-    void getRestaurants(String location, int page,
-                        String sort, @NonNull GetRestaurantsCallback callback);
+    Observable<List<Restaurant>> getRestaurants(String location, int page, String sort);
+    int getTotalCount();
+    int currentCount();
 }

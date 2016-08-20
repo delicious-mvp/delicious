@@ -7,7 +7,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.delicious.delicious.R;
 import com.delicious.delicious.base.BaseFragment;
 import com.delicious.delicious.ui.restaurants.adpater.RestaurantsAdapter;
@@ -82,16 +81,20 @@ public class RestaurantsFragment extends BaseFragment<RestaurantContract.Present
         public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
             super.onScrollStateChanged(recyclerView, newState);
 
-            RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
-            if (layoutManager instanceof LinearLayoutManager) {
-                LinearLayoutManager linearLayoutManager = (LinearLayoutManager) layoutManager;
-                int visibleItemCount = linearLayoutManager.getChildCount();
-                int totalItemCount = linearLayoutManager.getItemCount();
-                int firstVisibleItemPosition = linearLayoutManager.findFirstVisibleItemPosition();
-                if (visibleItemCount + firstVisibleItemPosition >= totalItemCount) {
-                    getPresenter().loadRestaurants("37.476585,126.981858", "0");
+            if(!getPresenter().isLoading()){
+                RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
+                if (layoutManager instanceof LinearLayoutManager) {
+                    LinearLayoutManager linearLayoutManager = (LinearLayoutManager) layoutManager;
+                    int visibleItemCount = linearLayoutManager.getChildCount();
+                    int totalItemCount = linearLayoutManager.getItemCount();
+                    int firstVisibleItemPosition = linearLayoutManager.findFirstVisibleItemPosition();
+
+                    if (visibleItemCount + firstVisibleItemPosition > totalItemCount - 2 && getPresenter().hasMoreNext()) {
+                        getPresenter().loadRestaurants("37.476585,126.981858", "0");
+                    }
                 }
             }
+
         }
     };
 }

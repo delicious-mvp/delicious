@@ -1,6 +1,7 @@
 package com.delicious.delicious.network;
 
 import android.annotation.SuppressLint;
+import android.util.Log;
 
 import com.facebook.stetho.okhttp3.StethoInterceptor;
 
@@ -44,7 +45,7 @@ public class RetrofitCreator {
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
             @Override
             public void log(String message) {
-
+                Log.v("OKHTTP","message :"+message);
             }
         });
         logging.setLevel(HttpLoggingInterceptor.Level.BODY);

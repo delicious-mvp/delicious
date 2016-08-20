@@ -19,6 +19,9 @@ android {
         targetSdkVersion 24
         versionCode 1
         versionName "1.0"
+        ndk {
+            abiFilters "armeabi", "armeabi-v7a", "x86"
+        }
     }
 
     buildTypes {
@@ -65,6 +68,7 @@ dependencies {
     // Image loader
     compile group: 'com.facebook.fresco', name: 'fresco', version: "$rootProject.ext.frescoVersion"
     compile group: 'com.facebook.fresco', name: 'imagepipeline-okhttp3', version: "$rootProject.ext.frescoVersion"
+
 
     // RX
     compile "io.reactivex:rxandroid:$rootProject.ext.rxandroidVersion"

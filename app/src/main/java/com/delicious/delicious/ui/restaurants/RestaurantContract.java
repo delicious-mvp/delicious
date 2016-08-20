@@ -18,5 +18,9 @@ public interface RestaurantContract {
         void setAdapterView(RestaurantsAdapterContract.Model adapterModel);
 
         void loadRestaurants(String location, String sort);
+
+        boolean hasMoreNext();
+
+        boolean isLoading();
     }
 }

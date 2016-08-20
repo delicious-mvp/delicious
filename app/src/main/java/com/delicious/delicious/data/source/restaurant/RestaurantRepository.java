@@ -6,6 +6,8 @@ import com.delicious.delicious.data.Restaurant;
 
 import java.util.List;
 
+import rx.Observable;
+
 public class RestaurantRepository implements RestaurantDataSource {
 
     private static RestaurantRepository sShopsRepository;
@@ -26,19 +28,18 @@ public class RestaurantRepository implements RestaurantDataSource {
     }
 
     @Override
-    public void getRestaurants(String location, int page,
-                               String sort, @NonNull GetRestaurantsCallback callback) {
-        restaurantDataSource.getRestaurants(location, page,sort, new GetRestaurantsCallback() {
-
-            @Override
-            public void onRestaurantsLoaded(List<Restaurant> restaurants) {
-                callback.onRestaurantsLoaded(restaurants);
-            }
-
-            @Override
-            public void onRestaurantsLoadFailed() {
-                callback.onRestaurantsLoadFailed();
-            }
-        });
+    public Observable<List<Restaurant>> getRestaurants(String location, int page, String sort) {
+        return restaurantDataSource.getRestaurants(location,page,sort);
     }
+
+    @Override
+    public int getTotalCount() {
+        return restaurantDataSource.getTotalCount();
+    }
+
+    @Override
+    public int currentCount() {
+        return restaurantDataSource.currentCount();
+    }
+
 }
