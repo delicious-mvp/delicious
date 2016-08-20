@@ -5,3 +5,8 @@
 .idea/
 .DS_Store
 /build
+
+# Generated files
+bin/
+gen/
+out/
