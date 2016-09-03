@@ -10,15 +10,43 @@ import java.util.List;
 public class RestaurantsAdapter extends ListDelegationAdapter<List<DisplayItem>>
         implements RestaurantsAdapterContract.View, RestaurantsAdapterContract.Model {
 
+    public interface OnItemCLickListener {
+
+        void onItemClicked(int position);
+    }
+
+    private RestaurantAdapterDelegate restaurantAdapterDelegate;
+    private OnItemCLickListener onRestaurantItemClickListener;
+
     public RestaurantsAdapter() {
         setItems(new ArrayList<>());
 
-        delegatesManager.addDelegate(new RestaurantAdapterDelegate());
+        restaurantAdapterDelegate = new RestaurantAdapterDelegate();
+        restaurantAdapterDelegate.setOnItemClickListener(new OnItemCLickListener() {
+
+            @Override
+            public void onItemClicked(int position) {
+                if (onRestaurantItemClickListener != null) {
+                    onRestaurantItemClickListener.onItemClicked(position);
+                }
+            }
+        });
+
+        delegatesManager.addDelegate(restaurantAdapterDelegate);
+    }
+
+    public void setOnRestaurantItemClickListener(OnItemCLickListener listener) {
+        onRestaurantItemClickListener = listener;
     }
 
     @Override
     public void addItems(List<DisplayItem> items) {
         getItems().addAll(items);
+    }
+
+    @Override
+    public DisplayItem getItem(int position) {
+        return items.get(position);
     }
 
     @Override

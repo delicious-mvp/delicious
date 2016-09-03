@@ -17,11 +17,20 @@ package com.delicious.delicious.ui.restaurants.adpater.displayitem;
 //addressBCode: "1162010300"
 public class RestaurantDisplayItem implements DisplayItem {
 
+    private String id;
     private String title;
     private String address;
     private String category;
     private String thumbnailUrl;
     private String distance;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getTitle() {
         return title;

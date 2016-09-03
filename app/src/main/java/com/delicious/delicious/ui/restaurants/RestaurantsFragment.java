@@ -1,5 +1,6 @@
 package com.delicious.delicious.ui.restaurants;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.delicious.delicious.R;
 import com.delicious.delicious.base.BaseFragment;
+import com.delicious.delicious.data.Restaurant;
+import com.delicious.delicious.ui.restaurant.RestaurantActivity;
 import com.delicious.delicious.ui.restaurants.adpater.RestaurantsAdapter;
 import com.delicious.delicious.ui.restaurants.adpater.RestaurantsAdapterContract;
 
@@ -44,6 +47,13 @@ public class RestaurantsFragment extends BaseFragment<RestaurantContract.Present
 
     private void setupRecyclerView() {
         RestaurantsAdapter adapter = new RestaurantsAdapter();
+        adapter.setOnRestaurantItemClickListener(new RestaurantsAdapter.OnItemCLickListener() {
+
+            @Override
+            public void onItemClicked(int position) {
+                getPresenter().goRestaurantDetail(position);
+            }
+        });
 
         recyclerView.setLayoutManager(
                 new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
@@ -72,7 +82,13 @@ public class RestaurantsFragment extends BaseFragment<RestaurantContract.Present
 
     @Override
     public void showLoadFailure() {
+    }
 
+    @Override
+    public void showRestaurantDetail(Restaurant restaurant) {
+        Intent intent = new Intent(getContext(), RestaurantActivity.class);
+        intent.putExtra(RestaurantActivity.EXTRA_RESTAURANT_URL, restaurant.getPlaceUrl());
+        startActivity(intent);
     }
 
     private RecyclerView.OnScrollListener onScrollListener = new RecyclerView.OnScrollListener() {

@@ -1,7 +1,5 @@
 package com.delicious.delicious.ui.restaurants;
 
-import android.util.Log;
-
 import com.delicious.delicious.base.presenter.AbstractPresenter;
 import com.delicious.delicious.data.Restaurant;
 import com.delicious.delicious.data.source.restaurant.RestaurantRepository;
@@ -86,6 +84,7 @@ public class RestaurantsPresenter extends AbstractPresenter<RestaurantContract.V
         for (Restaurant restaurant : restaurants) {
             RestaurantDisplayItem restaurantDisplayItem = new RestaurantDisplayItem();
 
+            restaurantDisplayItem.setId(restaurant.getId());
             restaurantDisplayItem.setTitle(restaurant.getTitle());
             restaurantDisplayItem.setCategory(restaurant.getCategory());
             restaurantDisplayItem.setDistance(restaurant.getDistance());
@@ -106,5 +105,20 @@ public class RestaurantsPresenter extends AbstractPresenter<RestaurantContract.V
     @Override
     public boolean isLoading() {
         return isLoading;
+    }
+
+    @Override
+    public void goRestaurantDetail(int position) {
+        DisplayItem item = adapterModel.getItem(position);
+        if (item instanceof RestaurantDisplayItem) {
+            RestaurantDisplayItem restaurantDisplayItem = (RestaurantDisplayItem) item;
+            restaurantRepository.getRestaurant(restaurantDisplayItem.getId()).subscribe(new Action1<Restaurant>() {
+
+                @Override
+                public void call(Restaurant restaurant) {
+                    getView().showRestaurantDetail(restaurant);
+                }
+            });
+        }
     }
 }

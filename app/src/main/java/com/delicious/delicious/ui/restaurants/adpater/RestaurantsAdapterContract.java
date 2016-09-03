@@ -15,6 +15,8 @@ public interface RestaurantsAdapterContract {
 
         void addItems(List<DisplayItem> item);
 
+        DisplayItem getItem(int position);
+
         void clearItems();
     }
 }

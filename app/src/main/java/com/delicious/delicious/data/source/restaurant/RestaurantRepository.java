@@ -33,6 +33,11 @@ public class RestaurantRepository implements RestaurantDataSource {
     }
 
     @Override
+    public Observable<Restaurant> getRestaurant(String id) {
+        return restaurantDataSource.getRestaurant(id);
+    }
+
+    @Override
     public int getTotalCount() {
         return restaurantDataSource.getTotalCount();
     }

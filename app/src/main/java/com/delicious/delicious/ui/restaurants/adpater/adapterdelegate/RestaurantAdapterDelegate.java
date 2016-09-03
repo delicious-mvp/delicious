@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.delicious.delicious.R;
+import com.delicious.delicious.ui.restaurants.adpater.RestaurantsAdapter;
 import com.delicious.delicious.ui.restaurants.adpater.displayitem.DisplayItem;
 import com.delicious.delicious.ui.restaurants.adpater.displayitem.RestaurantDisplayItem;
 import com.facebook.drawee.backends.pipeline.Fresco;
@@ -25,6 +26,11 @@ import butterknife.ButterKnife;
 
 public class RestaurantAdapterDelegate extends AbsListItemAdapterDelegate<RestaurantDisplayItem, DisplayItem, RestaurantAdapterDelegate.ShopViewHolder> {
 
+    private RestaurantsAdapter.OnItemCLickListener onItemCLickListener;
+
+    public void setOnItemClickListener(RestaurantsAdapter.OnItemCLickListener onRestaurantItemClickListener) {
+        this.onItemCLickListener = onRestaurantItemClickListener;
+    }
 
     @Override
     protected boolean isForViewType(@NonNull DisplayItem item, List<DisplayItem> items, int position) {
@@ -61,6 +67,12 @@ public class RestaurantAdapterDelegate extends AbsListItemAdapterDelegate<Restau
                 .setImageRequest(imageRequest)
                 .build();
         viewHolder.thumbnailImageView.setController(draweeController);
+
+        viewHolder.itemView.setOnClickListener(view -> {
+            if (onItemCLickListener != null) {
+                onItemCLickListener.onItemClicked(viewHolder.getAdapterPosition());
+            }
+        });
     }
 
 

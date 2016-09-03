@@ -2,6 +2,7 @@ package com.delicious.delicious.ui.restaurants;
 
 import com.delicious.delicious.base.presenter.BasePresenter;
 import com.delicious.delicious.base.presenter.BaseView;
+import com.delicious.delicious.data.Restaurant;
 import com.delicious.delicious.ui.restaurants.adpater.RestaurantsAdapterContract;
 
 public interface RestaurantContract {
@@ -11,6 +12,8 @@ public interface RestaurantContract {
         void showShops();
 
         void showLoadFailure();
+
+        void showRestaurantDetail(Restaurant restaurant);
     }
 
     interface Presenter extends BasePresenter {
@@ -22,5 +25,7 @@ public interface RestaurantContract {
         boolean hasMoreNext();
 
         boolean isLoading();
+
+        void goRestaurantDetail(int position);
     }
 }
