@@ -1,8 +1,12 @@
 package com.delicious.delicious.ui.restaurant;
 
+import android.annotation.TargetApi;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
@@ -26,12 +30,25 @@ public class RestaurantActivity extends BaseActivity {
         String url = getIntent().getStringExtra(EXTRA_RESTAURANT_URL);
 
         webview.getSettings().setJavaScriptEnabled(true);
+        webview.getSettings().setDomStorageEnabled(true);
+        webview.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
+
+        webview.setWebChromeClient(new WebChromeClient());
         webview.setWebViewClient(new WebViewClient() {
+
+            @TargetApi(Build.VERSION_CODES.LOLLIPOP)
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-                view.loadUrl(view.getUrl());
+                return shouldOverrideUrlLoading(view, request.getUrl().toString());
+            }
+
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                view.loadUrl(url);
                 return true;
             }
+
+
         });
         webview.loadUrl(url);
     }
